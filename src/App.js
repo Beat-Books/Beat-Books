@@ -1,17 +1,20 @@
 import React from "react";
 import { hot } from 'react-hot-loader/root';
+import MusicComponent from './components/musicRec'
 
 class App extends React.Component {
+ 
   render() {
     const { name } = this.props;
+
     return (
       <>
-        <h1>
-          Hello {name}
-        </h1>
+       <MusicComponent />
       </>
     );
   }
 }
 
 export default hot(App);
+
+
