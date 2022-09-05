@@ -2,6 +2,7 @@ import React from "react";
 import { hot } from 'react-hot-loader/root';
 import SearchComponent from './components/SearchComponent.js'
 import MusicComponent from './components/musicRec'
+import LoadingComponent from "./components/LoadingComponent.js";
 
 class App extends React.Component {
 
@@ -14,7 +15,7 @@ class App extends React.Component {
           Beat Books
         </h1>
         <SearchComponent />
-        <MusicComponent />
+        <LoadingComponent/>
       </>
     );
   }
