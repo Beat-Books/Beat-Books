@@ -14,7 +14,7 @@ class App extends React.Component {
         <h1>
           Beat Books
         </h1>
-        <SearchComponent />
+        {/* <SearchComponent /> */}
         <LoadingComponent/>
       </>
     );
