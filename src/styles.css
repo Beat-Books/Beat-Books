@@ -11,3 +11,8 @@
 height: 300px;
 width: 300px;
 }
+
+#logo-container {
+    display: flex;
+    height: 100px;
+}
