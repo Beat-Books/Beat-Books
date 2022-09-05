@@ -10,7 +10,8 @@ const LoadingComponent = ()=>{
         url: 'default url'
     }]);
     const [loading, setLoading] = useState(true);
-    const [tracks, setTracks] = useState(null)
+    const [tracks, setTracks] = useState(null);
+    const [subjects, setSubjects] = useState(null);
     // const fetchTracks = async ()=> {
     //     const response = await fetch('https://631630f233e540a6d38f0ae4.mockapi.io/api/tracks');
     //     setTracks(await response.json);
@@ -60,6 +61,7 @@ const LoadingComponent = ()=>{
         const bookParsed = await bookResponse.json();
         const listOfSubjects = [...bookParsed.results[0].subjects];
         console.log('List of Subjects: ',listOfSubjects);
+        setSubjects(listOfSubjects);
         listOfSubjects.forEach(el => {
             resultFromBooks += el.split(' ')[0]+' ';
         })
@@ -92,7 +94,7 @@ const LoadingComponent = ()=>{
     if(loading){
         return(
             <div>
-            <h1>Dope Beats For</h1>
+            <h1>Dope Beats For: </h1>
            <img src="https://ai-hmi.com/wp-content/plugins/preloader-sws/assets/img/bg-true/cassette.gif"></img>
            </div>
         )
@@ -102,6 +104,7 @@ const LoadingComponent = ()=>{
         <>
         <MusicComponent
         album = {tracks}
+        subjects = {subjects}
         />
         </>
     )
