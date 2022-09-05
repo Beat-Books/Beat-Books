@@ -78,9 +78,10 @@ const LoadingComponent = ()=>{
         for (let i = 0; i < spotifyParsed.albums.items.length; i++){
             const artistName = ''+spotifyParsed.albums.items[i].artists[0].name;
             const albumName = ''+''+spotifyParsed.albums.items[i].name;
+            const albumURI = ''+''+spotifyParsed.albums.items[i].uri.slice(14);
             const albumArtURL = ''+spotifyParsed.albums.items[i].images[0].url
             const spotifyURL = ''+spotifyParsed.albums.items[i].external_urls.spotify;
-            const albumInfo = { artistName, albumName, albumArtURL, spotifyURL };
+            const albumInfo = { artistName, albumName, albumArtURL, spotifyURL, albumURI };
             albums.push(albumInfo);
         }
         
