@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio&display=swap');
+
+body {
+    background-color: #fbeee0;
+    font-family: 'Antonio', sans-serif;
+}
+
+.header {
+    text-align: center;
+    padding: 50px;
+}
+
+.form {
+    text-align: center;
+    margin: 15%;
+    background-color: #f6d23f;
+    box-sizing: content-box;
+    border-radius: 30px;
+    opacity: 0.9;
+    box-shadow: #846a40 4px 4px 0 0;
+}
+
+.userInput {
+    display: inline-block;
+    padding: 8px;
+    margin: 10px;
+    width: 20%;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: #412701 3px 3px 0 0;
+    color: #5b3a0d;
+}
+
+.label {
+    display: inline-block;
+    width: 150px;
+    font-size: x-large;
+}
+
+.submitButton {
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 5px 20px;
+    margin: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-family: 'Antonio', sans-serif;
+}
+
+.loadingBox {
+    text-align: center;
+    margin: 30px;
+    padding: 200px;
+}
+
+#music-rec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;;
+}

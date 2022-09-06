@@ -1,26 +1,27 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+// import "../stylesheet/styles.css";
+import "../stylesheet/musicRecStyles.css";
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const MusicComponent = () => {
-   
-    const props = testCreator();
+const MusicComponent = ({album, subjects}) => {
+   console.log(album)
+
    
 const [counter, setCount] = useState(0);
-const [currentTrack, setTrack] = useState(props[0])
+const [currentAlbum, setAlbum] = useState(album[0]);
+const navigate = useNavigate()
+useEffect(async ()=>{
+    // const response = await fetch("https://open.spotify.com/embed-podcast/iframe-api/v1")
+    // console.log(response)
+}, [])
 
-
-console.log(counter);
-console.log(currentTrack)
-
-    const artistName = 'Beck';
-    const songName = 'Loser'
-    const albumArt = "https://i.scdn.co/image/ab67616d0000b273b07e5a0787e609bc1f1270f8"
-    const songUrl = "www.spotify.com"
 
 function handleClick(e) {
-// window.location.href = currentTrack.songUrl
-console.log('click handled')
+navigate('/')
+console.log('subjects', subjects)
+
 }
 
 function handleScroll(e){
@@ -28,48 +29,43 @@ function handleScroll(e){
 
     e.preventDefault()
     setCount(counter + 1)
-    if(counter === props.length - 1) setCount(0)
-    setTrack(props[counter])
+    if(counter === album.length - 1) setCount(0)
+    setAlbum(album[counter])
     
  
 }
+const listArr = [];
 
-function testCreator(){
-    const result = [];
+subjects.forEach((element, i) => {
+    listArr.push(
+        <li id={i}>{element} </li>
+    )
+});
 
-    let count = 10;
-
-    while(count > 0){
-        result.push({
-            artistName: `name ${count}`,
-            albumArt: `art ${count}`,
-            songName: `song ${count}`,
-            songUrl: `ur; ${count}`
-
-
-        })
-    count--
-    }
-    return result;
-}
     return (
-        // <div>
-        // <img id="album-art" src={albumArt}></img>
-        // <div id="song-info"><span className="bold">Artist:</span> {artistName} <span className="bold">Song:</span> {songName} </div>
-        // <div><button id="listen-now" onClick={handleClick}>Listen Now</button></div>
-
-        // <div><button id="next-song" onClick={handleScroll}>Next Song</button></div>
-        // </div>
-        <div>
-        {/* <img id="album-art" src={currentTrack.albumArt}></img> */}
-        <h1>{currentTrack.albumArt}</h1>
-        <div id="song-info"><span className="bold">Artist:</span> {currentTrack.artistName} <span className="bold">Song:</span> {currentTrack.songName} </div>
-        <div><button id="listen-now" onClick={handleClick}>Listen Now</button></div>
-
-        <div><button id="next-song" onClick={handleScroll}>Next Song</button></div>
+        <div id="dope-beats" className="container">
+            <div className="dope-beats"><h3>Dope Beats To Pair With Hints Of...</h3></div>
+            <div className="subjects-list">
+                <ul>
+                {listArr} 
+                </ul>
+            </div>
+            <div className="album-art">
+                <img id="album-art" src={currentAlbum.albumArtURL}></img>
+            </div>
+            <div id="song-info" className="artist-info">ARTIST:{currentAlbum.artistName} </div>
+            <div className = "album-info">ALBUM: {currentAlbum.albumName} </div>
+            <div className="next-album">
+                <button id="next-song" onClick={handleScroll} className="submitButton">Next Album</button>
+            </div>
+            <div className="search-again">
+                <button id="listen-now"  onClick={handleClick} className="submitButton">Search Again</button>
+            </div>
+            <div className="web-player">
+            <iframe  src={`https://open.spotify.com/embed-legacy/album/${currentAlbum.albumURI}?utm_source=generator `}width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" id="web-player"></iframe>
         </div>
-
-        
+        </div>
+    
     )
 }
 

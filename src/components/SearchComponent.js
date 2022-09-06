@@ -1,55 +1,47 @@
-import React from "react";
-//import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import "../stylesheet/styles.css";
+import logo from "../../assets/logo.png"
 
-class SearchComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bookName: "",
-            author: "",
+function SearchComponent() {
+    const [bookName, setBookName] = useState('');
+    const [author, setAuthor] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleBookName = e => {
+        setBookName(e.target.value);
+    };
+    const handleAuthor = e => {
+        setAuthor(e.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (!bookName || !author) {
+            alert("Please enter both fields.");
+            return;
         }
-        // const navigate = useNavigate();
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        navigate("/loading", {state: { book: bookName, author: author}});
     }
 
-    handleChange({ target }) {
-        console.log("author, book -->", this.state.author, this.state.bookName);
-        this.setState({ [target.name]: target.value })
-        console.log("checking state", this.state);
-    };
-
-    handleSubmit() {
-        console.log('hi');
-    };
-
-    // once the user hits the submit button, we want to navigate them to the loading page
-    // navigateToLoading() {
-    //     navigate('/LoadingComponent', { replace: true });
-    // }
-
-    render() {
-        return (
-            <React.Fragment>
-                <form>
-                    <div>
-                        <b><label> Book Name: </label></b>
-                        <input type="text" name="bookName" value={this.state.bookName} onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <b><label> Author: </label></b>
-                        <input type="text" name="author" value={this.state.author} onChange={this.handleChange} />
-                    </div>
-                    <button type="button"
-                    // onClick={this.navigateToLoading}
-                    >
-                        Submit
-                    </button>
-                </form>
-            </React.Fragment>
-        )
-    }
+    return (
+        <div>
+            <div className="form">
+                <div className="header">
+                    <img src={logo} width={'50%'} />
+                </div>
+                <b><label className="label">Book Name</label></b>
+                <input type='text' value={bookName} onChange={handleBookName} className="userInput" />
+                <br />
+                <b><label className="label"> Author </label></b>
+                <input type='text' value={author} onChange={handleAuthor} className="userInput" />
+                <br />
+                <button onClick={handleSubmit} className="submitButton">Submit</button>
+            </div >
+        </div >
+    )
 }
+
+
 
 export default SearchComponent;

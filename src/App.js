@@ -1,21 +1,23 @@
 import React from "react";
 import { hot } from 'react-hot-loader/root';
-import SearchComponent from './components/SearchComponent.js'
-import MusicComponent from './components/musicRec'
+import SearchComponent from './components/SearchComponent';
+import MusicComponent from './components/musicRec';
+import LoadingComponent from './components/LoadingComponent';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 class App extends React.Component {
 
   render() {
-    const { name } = this.props;
-
     return (
-      <>
-        <h1>
-          Beat Books
-        </h1>
-        <SearchComponent />
-        <MusicComponent />
-      </>
+      <React.Fragment>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<SearchComponent />} />
+            <Route path='/loading' element={<LoadingComponent />} />
+            <Route path='/music' element={<MusicComponent />} />
+          </Routes>
+        </BrowserRouter>
+      </React.Fragment>
     );
   }
 }
