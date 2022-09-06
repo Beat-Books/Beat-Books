@@ -1,5 +1,5 @@
 {
-  "name": "beat-books",
+  "name": "bookbeats",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,19 +7,19 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production",
-    "start": "webpack serve --hot --mode development"
+    "start": "webpack-dev-server --mode development & nodemon ./server/main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Beat-Books/Beat-Books.git"
+    "url": "git+https://github.com/myoctopuscoders/bookbeats.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Beat-Books/Beat-Books/issues"
+    "url": "https://github.com/myoctopuscoders/bookbeats/issues"
   },
-  "homepage": "https://github.com/Beat-Books/Beat-Books#readme",
+  "homepage": "https://github.com/myoctopuscoders/bookbeats#readme",
   "devDependencies": {
     "@babel/core": "^7.18.13",
     "@babel/preset-env": "^7.18.10",
@@ -30,6 +30,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
+    "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
     "react-router-dom": "^6.3.0",
     "sass-loader": "^13.0.2",
