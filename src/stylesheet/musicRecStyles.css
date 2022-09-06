@@ -1,0 +1,104 @@
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr 0.9fr 1.1fr;
+    grid-template-rows: 0.9fr 0.7fr 1.2fr 1.2fr 1.2fr 0.6fr 0.6fr 1.6fr;
+    height: 120vh;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dope-beats dope-beats dope-beats dope-beats"
+      "subjects-list subjects-list subjects-list subjects-list"
+      "album-art album-art album-art album-art"
+      "album-art album-art album-art album-art"
+      "album-art album-art album-art album-art"
+      "artist-info artist-info album-info album-info"
+      "next-album next-album search-again search-again"
+      "web-player web-player web-player web-player";
+  }
+  
+  .album-art { 
+    grid-area: album-art; 
+    /* border: solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 310px;
+  }
+  
+  .artist-info { 
+    grid-area: artist-info; 
+    /* border: solid black; */
+    font-size: 4vh;
+    padding-right: 2vw;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .album-info { 
+    grid-area: album-info; 
+    /* border: solid black; */
+    font-size: 4vh;
+    padding-left: 2vw;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .dope-beats { 
+    grid-area: dope-beats;
+    display: flex;
+    /* border: solid black; */
+    align-items: center;
+    justify-content: center;
+    font-size: 4vh;
+
+  }
+  
+  .next-album { 
+    grid-area: next-album;
+    /* border: solid black; */
+    padding-right: 2vw;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-again { 
+    grid-area: search-again; 
+    display: flex;
+    justify-content: center;
+    /* border: solid black; */
+  }
+  
+  .web-player { 
+    grid-area: web-player; 
+    padding-left: 6vw;
+    padding-right: 6vw;
+    /* border: solid black; */
+  }
+  
+  .subjects-list { 
+    grid-area: subjects-list;
+    /* border: solid black;  */
+    font-size: 2.5vh;
+    display: flex;
+    align-items: center;
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+  
+  ul {
+    list-style: none;
+  }
+
+  li {
+    float: left;
+    padding-left: 8px;
+  }
+
+  #album-art {
+    /* border: solid black; */
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  #web-player {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
