@@ -1,5 +1,5 @@
 const controller = {};
-const token = 'BQA2kkKxw1slctyXxMDzr7RWhbocI6uMe7dwukLkjBk7mG9EEoYQepahA48-3CRTRj4VPTqN2S3Eg4nfs5iprKv3LHxJ-zQmpQTbAcv-NK9epcGpyhUXrB2iGAf0b-2h007Q9WhMCKk88O4xXtn_ijSzOc5TatToBETEzSa2B3GgE-4';
+const token = 'BQBm6fX3D_pQLZIC9WU9UJgpsruqTY5VBDKl9I5Aidan-wjsjqf0dRPImNYVk5O95Vh1BngLKUItuUIl73KvvS-YS6RLhvnBYBK7wllsimlRC045d_b1MAyStm6IxOPhZjyROSiEljU5ZOydNYtvAOZ4Ym2BVl8jDq_3LdYQtmR8-JI';
 
 const bookToMusicAsync = async (searchString) => {
     let resultFromBooks = '';

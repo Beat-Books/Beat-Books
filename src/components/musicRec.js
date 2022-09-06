@@ -1,6 +1,9 @@
 
 import React, { useEffect } from "react";
 import { useState } from "react";
+// import "../stylesheet/styles.css";
+import "../stylesheet/musicRecStyles.css";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const MusicComponent = ({album, subjects}) => {
    console.log(album)
@@ -8,7 +11,7 @@ const MusicComponent = ({album, subjects}) => {
    
 const [counter, setCount] = useState(0);
 const [currentAlbum, setAlbum] = useState(album[0]);
-
+const navigate = useNavigate()
 useEffect(async ()=>{
     // const response = await fetch("https://open.spotify.com/embed-podcast/iframe-api/v1")
     // console.log(response)
@@ -16,7 +19,7 @@ useEffect(async ()=>{
 
 
 function handleClick(e) {
-// window.location.href = currentAlbum.spotifyURL
+navigate('/')
 console.log('subjects', subjects)
 
 }
@@ -33,23 +36,34 @@ function handleScroll(e){
 }
 const listArr = [];
 
-subjects.forEach(element => {
+subjects.forEach((element, i) => {
     listArr.push(
-        <li>{element}</li>
+        <li id={i}>{element} </li>
     )
 });
 
     return (
-        <div>
-        <ul><h3>Dope Beats To Pair With Hints Of...</h3>
-        <li>{listArr}</li>
-        </ul>
-        <img id="album-art" src={currentAlbum.albumArtURL}></img>
-        <div id="song-info"><span className="bold">Artist:</span> {currentAlbum.artistName} <span className="bold">Album:</span> {currentAlbum.albumName} </div>
-        <div><button id="listen-now" onClick={handleClick}>Listen Now</button></div>
-
-        <div><button id="next-song" onClick={handleScroll}>Next Album</button></div>
-        <iframe  src={`https://open.spotify.com/embed-legacy/album/${currentAlbum.albumURI}?utm_source=generator `}width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div id="dope-beats" className="container">
+            <div className="dope-beats"><h3>Dope Beats To Pair With Hints Of...</h3></div>
+            <div className="subjects-list">
+                <ul>
+                {listArr} 
+                </ul>
+            </div>
+            <div className="album-art">
+                <img id="album-art" src={currentAlbum.albumArtURL}></img>
+            </div>
+            <div id="song-info" className="artist-info">ARTIST:{currentAlbum.artistName} </div>
+            <div className = "album-info">ALBUM: {currentAlbum.albumName} </div>
+            <div className="next-album">
+                <button id="next-song" onClick={handleScroll} className="submitButton">Next Album</button>
+            </div>
+            <div className="search-again">
+                <button id="listen-now"  onClick={handleClick} className="submitButton">Search Again</button>
+            </div>
+            <div className="web-player">
+            <iframe  src={`https://open.spotify.com/embed-legacy/album/${currentAlbum.albumURI}?utm_source=generator `}width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" id="web-player"></iframe>
+        </div>
         </div>
     
     )
