@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
   res.status(200).end();
 })
 
-//app.use('/api/music', musicRouter);
+app.use('/api/music', musicRouter);
 
 /* changes default behavior to "find first avaible port" in testing. This allows
 multiple tests to be run in paralell on different ports */
