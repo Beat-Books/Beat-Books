@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Book from './Book';
 import Song from './Song';
 
-const ProfileComponent = (props) => {
+const ProfileContainer = (props) => {
   const [userProfile, setUserProfile] = useState({
     username: '',
     favoriteBooks: [],
@@ -106,4 +106,4 @@ const ProfileComponent = (props) => {
   );
 };
 
-export default ProfileComponent;
+export default ProfileContainer;
