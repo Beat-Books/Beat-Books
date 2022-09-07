@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import LandingPage from  './Containers/LandingPage';
 import SignupPage from "./Containers/SignupPage";
 import SearchContainer from './Containers/SearchContainer';
 import MusicContainer from './Containers/musicRec';
 import LoadingContainer from './Containers/LoadingContainer';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProfileComponent from './components/ProfileComponent';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <React.Fragment>
         <BrowserRouter>
           <Routes>
+            <Route path='/' element={<ProfileComponent />} />
             <Route path='/' element={<LandingPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/search' element={<SearchContainer />} />
