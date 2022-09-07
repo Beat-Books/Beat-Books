@@ -53,4 +53,47 @@ userController.getUserProfile = (req, res, next) => {
     });
 }
 
+userController.addFavoriteBook = (req, res, next) => {
+  const { username, bookTitle, bookAuthor } = req.body;
+  const obj = { bookTitle, bookAuthor };
+  User.findOneAndUpdate(
+    { username }, 
+    {$push: 
+      { favoriteBooks: obj } }, 
+    {new: true, upsert: true}, 
+    (err, addedBook) => {
+      if (err) { return next({
+        log: 'an error occurred in the addFavoriteBook middleware function',
+        message: {err: err},
+
+      })
+      } else {
+        res.locals.addedBook = addedBook;
+        return next();
+      }
+    }
+  )
+}
+
+
+userController.addFavoriteSong = (req, res, next) => {
+  const { username, songName, songArtist } = req.body;
+  const obj = { songName, songArtist };
+  User.findOneAndUpdate(
+    { username }, // search obj
+    {$push: { favoriteSongs: obj } }, //update obj
+    {upsert: true, new: true}
+  )
+  .then(updatedObj => {
+    res.locals.updatedObj = updatedObj;
+    return next();
+  })
+  .catch(err => {
+    console.log({
+      log: 'an error occurred in addFavoriteSong',
+      message: {err: err},
+    });
+  })
+}
+
 module.exports = userController;

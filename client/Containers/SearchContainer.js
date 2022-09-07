@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "../stylesheet/styles.css";
 import logo from "../../assets/logo.png"
 
-function SearchComponent() {
+function SearchContainer() {
     const [bookName, setBookName] = useState('');
     const [author, setAuthor] = useState('');
 
@@ -44,4 +44,4 @@ function SearchComponent() {
 
 
 
-export default SearchComponent;
+export default SearchContainer;

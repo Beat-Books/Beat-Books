@@ -7,7 +7,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { useLocation } from "react-router-dom";
 
 
-const LoadingComponent = ()=>{
+const LoadingContainer = ()=>{
     const [cover, setCover] = useState([{
         title: 'default',
         url: 'default url'
@@ -134,4 +134,4 @@ const LoadingComponent = ()=>{
 
 }
 
-export default LoadingComponent
+export default LoadingContainer
