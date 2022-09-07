@@ -5,7 +5,7 @@ import { useState } from "react";
 import "../stylesheet/musicRecStyles.css";
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const MusicComponent = ({album, subjects}) => {
+const MusicContainer = ({album, subjects}) => {
    console.log(album)
 
    
@@ -70,4 +70,4 @@ subjects.forEach((element, i) => {
 }
 
 
-export default MusicComponent;
+export default MusicContainer;
