@@ -1,0 +1,1 @@
+const controller = require('../server/controllers/musicController');

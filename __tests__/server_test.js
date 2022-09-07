@@ -3,9 +3,10 @@ const request = require('supertest');
 
 describe('express server', () => {
 
-  test('is listening', async () => {
-    const res = await request(app)
+  test('is listening', (done) => {
+    request(app)
       .get('/')
-      .expect(200);
+      .expect(200)
+      .end((err, res) => done());
   })
 })
