@@ -6,6 +6,6 @@ describe('express server', () => {
   test('is listening', async () => {
     const res = await request(app)
       .get('/')
-      .expect(200);
+      .expect(200)
   })
 })
