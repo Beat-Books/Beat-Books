@@ -50,11 +50,6 @@ app.get('/', (req, res) => {
   res.status(200).end();
 })
 
-
-app.listen(PORT, (req, res) => {
-  console.log(`Yay, express server is running on PORT ${PORT}.`);
-});
-
 app.use('/api/music', musicRouter);
 
 /* changes default behavior to "find first avaible port" in testing. This allows
