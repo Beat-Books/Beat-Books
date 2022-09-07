@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const musicRouter = require('./routes/music');
+//const musicRouter = require('./routes/music');
 const app = express();
 const PORT = 3000;
 const dotenv = require('dotenv').config();
@@ -50,12 +50,7 @@ app.get('/', (req, res) => {
   res.status(200).end();
 })
 
-
-app.listen(PORT, (req, res) => {
-  console.log(`Yay, express server is running on PORT ${PORT}.`);
-});
-
-app.use('/api/music', musicRouter);
+//app.use('/api/music', musicRouter);
 
 /* changes default behavior to "find first avaible port" in testing. This allows
 multiple tests to be run in paralell on different ports */

@@ -15,4 +15,18 @@ router.get(
   }
 );
 
+router.post('/addBook',
+  userController.addFavoriteBook,
+  (req, res) => {
+    return res.status(200).json(res.locals.addedBook);
+  }
+);
+
+router.post('/addSong',
+  userController.addFavoriteSong,
+  (req, res) => {
+    return res.status(200).json(res.locals.updatedObj);
+  }
+);
+
 module.exports = router;
