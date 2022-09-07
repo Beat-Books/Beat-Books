@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const CryptoJS = require('crypto-js')
 const sha256 = require('crypto-js/sha256');
+const SpotifyModel = require('../models/spotifyModel');
 const spotifyController = {};
 
 const client_id = process.env.SPOTIFY_CID;
@@ -35,11 +36,13 @@ spotifyController.authorizeUser = (req, res, next) => {
   catch (err) {
     return next({
       log: 'error in spotifyController.authorizeUser',
-      error: err
+      message: { err }
     })
   }
 }
 
+// exchange auth code for access token
+// note: access tokens expire every 30mins.
 spotifyController.getAccessToken = async (req, res, next) => {
   try {
     const code = req.query.code;
@@ -68,11 +71,30 @@ spotifyController.getAccessToken = async (req, res, next) => {
   catch (err) {
     return next({
       log: 'error in spotifyController.getAccessToken',
-      error: err
+      message: { err }
     })
   }
 }
 
-
+// write tokens to userDB
+// NOTE: Work in progress. encountering an unknown middleware error
+spotifyController.saveTokens = async (req, res, next) => {
+  try {
+    console.log(res.locals.spotifyTokens);
+    const { access_token, token_type, scope, expires_in, refresh_token } = res.locals.spotifyTokens;
+    const username = 'sagarvxyz' // NOTE: this should be dynamic, and retrieved at login.
+    const query = await SpotifyModel.create(
+      { username, access_token, token_type, scope, expires_in, refresh_token }
+    );
+    console.log(query);
+    return next();
+  }
+  catch (err) {
+    return next({
+      message: 'error in spotifyController.saveTokens',
+      message: { err }
+    })
+  }
+};
 
 module.exports = spotifyController;
