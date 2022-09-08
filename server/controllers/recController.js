@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const recController = {};
 // source: https://developer.spotify.com/console/get-available-genre-seeds/
-const tempToken = 'BQDie5H8cvWAgzypX2op_iMk-D9f8r80Se0hbIgRje8yr7TaXP-Vpqa6LrgZvWubGYDD0jmmRSMautH6PKQvKPToV5sI_utYlaJ3sitn3zF9mJJrD7GwYpVKJefJ44qZw7ZOGVPJXHaLIxt02pNAV-c6LJbVfkVKFwQ4ZwMvBwy-iCUgofsrMqHQaS1cEY6MR3s'
+const tempToken = 'BQCyS0uuyofDOY2MXwMn1R0DGx-HD4MW7m4XyoLliuC-T4oqy91R3c4OQlE3hQ8ElXQMNRcCgvEmBSzVz5ZUG03rYJcfOrpn5grBKcBPoH8OpJyWeCz3rqACEybyd7FCYPA3E1EPpKdFiJZBxyNgOCbbVmD3PX5BMjJgrsjEp852_PFffd_J2rgX2IJS4iWY2mc'
 /* MUSIC REC LOGIC */
 /**
  * function parseQuery with:
@@ -76,14 +76,14 @@ recController.getMusic = async (req, res, next) => {
     const searchArray = res.locals.searchArray;
     const userToken = tempToken; // NOTE: replace with token from UserModel
     res.locals.spotifyMatches = [];
-
     // default playlist if no results are found
     let defaultAlbum = {
-      name: 'Reading Playlist',
-      artist: 'Spotify',
-      image: 'https://i.pinimg.com/736x/69/b2/5e/69b25e2c2d0b29cdec93da2fd28ee2ec--old-books-vintage-books.jpg',
-      url: 'https://open.spotify.com/playlist/37i9dQZF1DWZwtERXCS82H?si=f78f10d73894477c',
-      type: 'playlist'
+      name: 'Reading Rainbows Greatest Hits',
+      artist: 'Reading Rainbow',
+      image: 'https://m.media-amazon.com/images/I/81I56pR4RCL._SS500_.jpg',
+      url: 'https://open.spotify.com/album/7HXEa9br4BSi46r6APyDo1',
+      uri: '7HXEa9br4BSi46r6APyDo1',
+      type: 'album'
     };
       
     if (searchArray.length == 0) {
@@ -99,14 +99,17 @@ recController.getMusic = async (req, res, next) => {
           'Content-Type': 'application/json'
         }
       });
+      
       let data = await query.json();
-      let match = data.albums.items;
+      let match = await data.albums.items;
+
       // exit loop after 3 matches
       for (let i = 0; i < 3; i++) {
         let newMatch = {
           name: match[i].name,
           artist: match[i].artists[0].name,
           url: match[i].external_urls.spotify,
+          id: match[i].id,
           image: match[i].images[0].url,
           type: match[i].type
         };
@@ -116,6 +119,7 @@ recController.getMusic = async (req, res, next) => {
     if (res.locals.spotifyMatches.length == 0) {
       res.locals.spotifyMatches.push(defaultAlbum);
     }
+    console.log(res.locals.spotifyMatches);
     return next();
     
   } catch (err) {
