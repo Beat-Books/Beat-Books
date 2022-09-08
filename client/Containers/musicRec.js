@@ -15,9 +15,6 @@ import NavBar from './NavBar';
 //     )
 // }
 
-const string = 'spotify:artist:4sQpFoM4UXAXcniRKQyKWn';
-console.log(string.slice(':'))
-
 
 const MusicContainer = (props) => {
 
