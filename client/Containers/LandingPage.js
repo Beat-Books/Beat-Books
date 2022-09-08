@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,6 +32,12 @@ function LandingPage() {
       })
       .catch((err) => console.log('Error:', err));
   }
+
+  useEffect(() => {
+    if (sessionStorage.getItem('loggedIn')) {
+      navigate('/search');
+    }
+  }, []);
 
   //func to redirect you to signup if you don't have an account already.
   function redirectToSignup() {

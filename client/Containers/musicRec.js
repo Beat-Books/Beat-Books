@@ -95,7 +95,7 @@ const MusicContainer = (props) => {
       </div>
       <div className='web-player'>
         <iframe
-          src={`https://open.spotify.com/embed-legacy/album/${currentAlbumObj.url}?utm_source=generator `}
+          src={`https://open.spotify.com/embed-legacy/album/${currentAlbumObj.id}?utm_source=generator `}
           width='100%'
           height='380'
           frameBorder='0'
