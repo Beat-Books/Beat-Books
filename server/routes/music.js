@@ -2,6 +2,13 @@ const express = require('express');
 const spotifyController = require('../controllers/spotifyController');
 const router = express.Router();
 
+
+/* GET RECS */
+router.get('/spotify/rec',  spotifyController.getRec, (req, res) => {
+  res.status(200).end();
+})
+
+/* SPOTIFY AUTH FLOW */
 router.get('/spotify/auth', spotifyController.authorizeUser,
   (req, res) => {
     res.redirect(302, res.locals.authURL);
