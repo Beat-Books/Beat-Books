@@ -21,7 +21,6 @@ useEffect(async ()=>{
 function handleClick(e) {
 navigate('/')
 console.log('subjects', subjects)
-
 }
 
 function handleScroll(e){
