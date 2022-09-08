@@ -33,8 +33,8 @@ const ProfileContainer = (props) => {
 
       // END FOR TESTING
 
-      // const { username, favoriteBooks, favoriteSongs } = profileData;
-      // setUserProfile({ username, favoriteBooks, favoriteSongs });
+      const { username, favoriteBooks, favoriteSongs } = profileData;
+      setUserProfile({ username, favoriteBooks, favoriteSongs });
     };
 
     try {
