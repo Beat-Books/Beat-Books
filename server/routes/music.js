@@ -1,10 +1,11 @@
 const express = require('express');
 const spotifyController = require('../controllers/spotifyController');
+const recController = require('../controllers/recController');
 const router = express.Router();
 
 
 /* GET RECS */
-router.get('/spotify/rec',  spotifyController.getRec, (req, res) => {
+router.get('/spotify/rec',  recController.getMusic, (req, res) => {
   res.status(200).end();
 })
 
