@@ -3,20 +3,25 @@ const Session = require('../models/sessionModel');
 const authController = {};
 
 // authController.startSession
-    //create new session object and store in database
+//create new session object and store in database
 authController.startSession = (req, res, next) => {
-    const { cookieId } = req.body;
-    Session.create({cookieId: res.locals.id}, (err, createdSession) => {
+  //   const { cookieId } = req.body;
+  Session.findOneAndDelete({ cookieId: res.locals.id }).then(
+    (err, deletedSession) => {
+      Session.create({ cookieId: res.locals.id }, (err, createdSession) => {
         if (err) {
-            return next({
-                log: 'an error occurred in the startSession middleware function',
-                message: {err: err},
-            })
+          return next({
+            log: 'createSession error' + err,
+            message: { err: err },
+          });
         } else {
-            res.locals.session = createdSession;
-            return next();
+          console.log('start session: ', createdSession);
+          res.locals.session = createdSession;
+          return next();
         }
-    });
+      });
+    }
+  );
 };
 
 // set SSID Cookie
@@ -29,38 +34,37 @@ authController.setSSIDCookie = (req, res, next) => {
   return next();
 };
 
-
 // authController.endSession
-  // find an existing session in DB by user_id and delete it
+// find an existing session in DB by user_id and delete it
 authController.endSession = (req, res, next) => {
-    Session.findOneAndDelete({cookieId: req.cookies.ssid}, (err) => {
-        if (err) {
-            return next({
-                log: 'an error occurred in the endSession middleware function',
-                message: {err: err},
-            })
-        } else {
-            return next();
-        }
-    })
-}
+  Session.findOneAndDelete({ cookieId: req.cookies.ssid }, (err) => {
+    if (err) {
+      return next({
+        log: 'an error occurred in the endSession middleware function',
+        message: { err: err },
+      });
+    } else {
+      return next();
+    }
+  });
+};
 
 // authController.isLoggedIn
 // see if an existing session exists in DB for cookieId : req.cookies.ssid
 authController.isLoggedIn = (req, res, next) => {
-    console.log('checking is loggedin')
-    Session.findOne({ cookieId: req.cookies.ssid }, (err) => {
-        if (err) {
-            return next({
-            log: 'an error occurred in the isLoggedIn middleware function',
-            message: {err: err},
-        })
-       } else {
-        console.log('user session exists')
-        res.locals.id = req.cookies.ssid;
-         return next();
-       }
-    })
-}
+  console.log('checking is loggedin');
+  Session.findOne({ cookieId: req.cookies.ssid }, (err) => {
+    if (err) {
+      return next({
+        log: 'an error occurred in the isLoggedIn middleware function',
+        message: { err: err },
+      });
+    } else {
+      console.log('user session exists');
+      res.locals.id = req.cookies.ssid;
+      return next();
+    }
+  });
+};
 
 module.exports = authController;

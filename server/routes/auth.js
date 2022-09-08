@@ -27,7 +27,7 @@ router.post(
 );
 
 // Log out route
-router.post(
+router.get(
   '/logout',
   authController.isLoggedIn,
   authController.endSession,

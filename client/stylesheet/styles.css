@@ -99,6 +99,9 @@ body {
   font-size: 20px;
 }
 
+input:focus {
+  outline: none;
+}
 .musicPage {
   display: flex;
   flex-direction: column;

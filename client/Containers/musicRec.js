@@ -1,9 +1,9 @@
-
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 // import "../stylesheet/styles.css";
-import "../stylesheet/musicRecStyles.css";
+import '../stylesheet/musicRecStyles.css';
 import { Navigate, useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 
 // const MusicContainer = ({album, subjects}) => {
 //    console.log(album)
