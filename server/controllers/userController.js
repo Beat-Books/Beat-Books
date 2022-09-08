@@ -9,7 +9,7 @@ userController.createUser = (req, res, next) => {
     User.create({ username, password }, (err, createdUser) => {
         if (err) {
             return next({
-                log: 'an error occurred in the createUser middleware function',
+                log: 'an error occurred in the createUser middleware function' + err,
                 message: {err: err},
             });
         } else {

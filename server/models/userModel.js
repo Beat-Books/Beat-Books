@@ -20,6 +20,12 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  spotify_access_token: String,
+  spotify_refresh_token: String,
+  spotify_token_type: String,
+  spotify_scope: String,
+  spotify_token_expires_in_sec: Number,
+  spotify_token_created_at: Date,
   favoriteBooks: [
     {
       bookTitle: String,
