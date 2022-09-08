@@ -98,3 +98,7 @@ body {
 .song-container {
   font-size: 20px;
 }
+
+input:focus {
+  outline: none;
+}
