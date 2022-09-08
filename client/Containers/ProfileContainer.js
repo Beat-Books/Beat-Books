@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Book from './Book';
 import Song from './Song';
+import NavBar from './NavBar';
 
 const ProfileContainer = (props) => {
   const [userProfile, setUserProfile] = useState({
@@ -77,19 +78,19 @@ const ProfileContainer = (props) => {
   }, [userProfile]);
 
   const handleBack = () => {
-    <Redirect
-      to={{
-        pathname: '/',
-      }}
-    />;
+    navigate('/search');
   };
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('loggedIn')) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <div>
+      <NavBar />
       <div className='form'>
-        <a className='backToSearch' onClick={handleBack} href='/'>
-          {'< Back to Song Search'}
-        </a>
         <div className='heading'>Welcome, {userProfile.username}!</div>
         <div className='favorites-container'>
           <div className='favBooks'>
