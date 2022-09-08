@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const recController = {};
 // source: https://developer.spotify.com/console/get-available-genre-seeds/
-const tempToken = 'BQDNcdJYkwzY14KuPNLU7Z9iCHCBteuVwTe4to6oCbvyyBDtGfDbuZLbCRjz7m-5XhkIJSNyGJ1e4vd5HbynttNp1Mel8o14dw6CPHu7s7Gv5-SiyEK2PrT0Ctax-5coGkIQFHY6lh7UitJEZsROPeLcRJW92CH_HhHDY-8msH8Yw_CFiHcASu4t7KfIp_fzyLQ'
+const tempToken = 'BQCQ4s1dd2DBBTzhaNAIgkYw913FULz2h_uT5F1qST39eFeS1vFTB_Saz80bXyixus4ondtSJ_739xHdxc7wbDIPf1JD00unxNLwaS_p7Qn-zgzq3Yev_F1kbQYBmdYQadRt82VJMZ9ncClY-u8NjnmSe3HZmFrRDWEF9Z7c5DL7oHTdUBTtSB6jVUCvTSc2_As'
 
 /* MUSIC REC LOGIC */
 /**
@@ -23,11 +23,16 @@ const tempToken = 'BQDNcdJYkwzY14KuPNLU7Z9iCHCBteuVwTe4to6oCbvyyBDtGfDbuZLbCRjz7
 recController.getBookQuery = async (req, res, next) => {
   try {
     const { bookTitle, bookAuthor } = req.body;
-    console.log(bookTitle, bookAuthor);
     const searchUrl = `https://gutendex.com/books?search=${bookTitle}%20${bookAuthor}`;
     const bookResponse = await fetch(searchUrl);
     const bookParsed = await bookResponse.json();
-    res.locals.bookResponse = await bookParsed.results[0];
+    if (bookParsed.count > 0) {
+      res.locals.bookResponse = await bookParsed.results[0];
+    }
+    else {
+      res.locals.bookResponse = {title: 'none', authors: [{name:'none'}], subjects: []};
+    }
+    
     return next();
   } catch (err) {
     return next({
@@ -39,7 +44,10 @@ recController.getBookQuery = async (req, res, next) => {
 
 recController.getSearchArray = (req, res, next) => {
   try {
-    console.log(res.locals.bookResponse);
+    if (res.locals.bookResponse.title === 'none') {
+      res.locals.searchArray = [];
+      return next();
+    }
     const {title, authors, subjects} = res.locals.bookResponse;
     let searchArray = [title, authors[0].name, ...subjects];
     searchArray = searchArray.map((string) =>
@@ -75,7 +83,7 @@ recController.getMusic = async (req, res, next) => {
     
     // iterate through searchArray until a playlist is returned;
     for (const el of searchArray) {
-      let queryUrl = `https://api.spotify.com/v1/search?type=playlist&q=${el}`
+      let queryUrl = `https://api.spotify.com/v1/search?type=album&q=${el}`
       let query = await fetch(queryUrl, {
         headers: {
           'Authorization': 'Bearer ' + userToken,
@@ -83,8 +91,7 @@ recController.getMusic = async (req, res, next) => {
         }
       });
       let data = await query.json();
-      let playlistUrl = data.playlists.items[0].external_urls.spotify;
-
+      let playlistUrl = data.albums.items[0].external_urls.spotify;
       // exit loop and return as soon as a match is found
       if (playlistUrl) {
         res.locals.spotifyUrl = playlistUrl;
