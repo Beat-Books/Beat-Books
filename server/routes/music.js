@@ -5,9 +5,14 @@ const router = express.Router();
 
 
 /* GET RECS */
-router.get('/spotify/rec',  recController.getMusic, (req, res) => {
-  res.status(200).end();
-})
+router.post('/rec', // NOTE: Change to POST in production
+  recController.getBookQuery,
+  recController.getSearchArray,
+  recController.getMusic, 
+  (req, res) => {
+    res.status(200).json(res.locals.spotifyUrl);
+  }
+)
 
 /* SPOTIFY AUTH FLOW */
 router.get('/spotify/auth', spotifyController.authorizeUser,
@@ -19,7 +24,7 @@ router.get('/spotify/auth', spotifyController.authorizeUser,
 router.get(
   '/spotify/auth/token', 
   spotifyController.getAccessToken,
-  spotifyController.saveTokens, // NOTE: WIP. running into middleware errors
+  spotifyController.saveTokens,
   (req, res) => {
     console.log('/spotify/auth/token token recieved');
     res.status(200).end();
