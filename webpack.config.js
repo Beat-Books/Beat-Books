@@ -29,6 +29,11 @@ const config = {
         use: ['react-hot-loader/webpack'] // preserves state when changes are made to the frontend
       },
       {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
+      {
         test: /\.css$/,
         use: [
           'style-loader',
