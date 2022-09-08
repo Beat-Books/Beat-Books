@@ -1,0 +1,18 @@
+.bold {
+    font-weight: bold;
+}
+
+#album-art {
+    height: 300px;
+    width: 300px;
+}
+
+#book-cover {
+height: 300px;
+width: 300px;
+}
+
+#logo-container {
+    display: flex;
+    height: 100px;
+}

@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: [
     'react-hot-loader/patch',
-    './src/index.js'
+    './client/index.js'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -17,12 +17,22 @@ const config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-            loader: 'babel-loader',
-            options: {
-                presets: ['@babel/preset-env', '@babel/preset-react']
-            }
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
         },
-      }, 
+      },
+      {
+        test: /\.js$/,
+        include: /node_modules\/react-dom/,
+        use: ['react-hot-loader/webpack'] // preserves state when changes are made to the frontend
+      },
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
       {
         test: /\.css$/,
         use: [
@@ -34,7 +44,7 @@ const config = {
         test: /\.png$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'url-loader', // used for importing images
             options: {
               mimetype: 'image/png'
             }
@@ -43,7 +53,7 @@ const config = {
       },
       {
         test: /\.svg$/,
-        use: 'file-loader'
+        use: 'file-loader' // used for importing SVG files
       },
       {
         test: /\.scss$/,
@@ -56,15 +66,19 @@ const config = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({ // generates index.html file for easy debugging
       templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"app\"></div></body></html>',
       filename: 'index.html',
     })
   ],
   devServer: {
     'static': {
-      directory: './dist'
-    }
+      directory: './dist' //creates & stores a bundle.js file in memory
+    },
+    port: 9000,
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
   }
 };
 
