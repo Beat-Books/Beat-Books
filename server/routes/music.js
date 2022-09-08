@@ -11,7 +11,7 @@ router.get('/spotify/auth', spotifyController.authorizeUser,
 router.get(
   '/spotify/auth/token', 
   spotifyController.getAccessToken,
-  // spotifyController.saveTokens, // NOTE: WIP. running into middleware errors
+  spotifyController.saveTokens, // NOTE: WIP. running into middleware errors
   (req, res) => {
     console.log('/spotify/auth/token token recieved');
     res.status(200).end();

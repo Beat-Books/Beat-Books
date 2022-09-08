@@ -2,12 +2,14 @@ const fetch = require('node-fetch');
 const CryptoJS = require('crypto-js')
 const sha256 = require('crypto-js/sha256');
 const SpotifyModel = require('../models/spotifyModel');
+const UserModel = require('../models/userModel');
 const spotifyController = {};
 
 const client_id = process.env.SPOTIFY_CID;
 const secret = process.env.SPOTIFY_SECRET;
 const redirect_uri = process.env.SPOTIFY_REDIRECT;
 const code_verifier = process.env.SPOTIFY_VERIFIER;
+const state = Math.random().toString();
 
 
 // using Spotify Auth code flow: https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
@@ -16,8 +18,8 @@ spotifyController.authorizeUser = (req, res, next) => {
   try {
     const scope = 'user-read-playback-position user-read-playback-state \
       streaming user-top-read user-library-read user-read-recently-played';
-    const state = Math.random().toString();
-    const code_challenge = sha256(code_verifier);
+    
+    // const code_challenge = sha256(code_verifier);
     const url = 'https://accounts.spotify.com/authorize?';
     const params = new URLSearchParams({
       client_id,
@@ -46,6 +48,7 @@ spotifyController.authorizeUser = (req, res, next) => {
 spotifyController.getAccessToken = async (req, res, next) => {
   try {
     const code = req.query.code;
+    const recievedState = req.query.state;
     const url = 'https://accounts.spotify.com/api/token';
     const cid64 = Buffer.from(client_id + ':' + secret).toString('base64');
     const formBody = new URLSearchParams({
@@ -80,13 +83,20 @@ spotifyController.getAccessToken = async (req, res, next) => {
 // NOTE: Work in progress. encountering an unknown middleware error
 spotifyController.saveTokens = async (req, res, next) => {
   try {
-    console.log(res.locals.spotifyTokens);
     const { access_token, token_type, scope, expires_in, refresh_token } = res.locals.spotifyTokens;
     const username = 'sagarvxyz' // NOTE: this should be dynamic, and retrieved at login.
-    const query = await SpotifyModel.create(
-      { username, access_token, token_type, scope, expires_in, refresh_token }
+    const doc = await UserModel.findOneAndUpdate(
+      { username },
+      { 
+        spotify_access_token: access_token,
+        spotify_refresh_token: refresh_token,
+        spotify_token_type: token_type,
+        spotify_scope: scope,
+        spotify_token_expires_in_sec: expires_in,
+        spotify_token_created_at: new Date()
+      },
+      { new: true }
     );
-    console.log(query);
     return next();
   }
   catch (err) {
