@@ -35,6 +35,9 @@ function SignupPage() {
     .catch(err => console.log('Error:', err))
 }
     //Do we want to display a popup that says 'Account created Succesfully before the redirect?'
+    const navigateToMusic = () => {
+        navigate('/music')
+    }
 
     //return the elements that you want to be displayed on the page:
     return (
@@ -46,6 +49,7 @@ function SignupPage() {
             <input type="password" placeholder="Confirm passsword" id="confirmPassword"/>
             <br></br>
             <button onClick={sendPostRequest}>Sign Up!</button>
+            <button onClick={navigateToMusic}>go to music</button>
         </div>
     )
 }
