@@ -1,47 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../stylesheet/styles.css";
-import logo from "../../assets/logo.png"
+import '../stylesheet/styles.css';
+import logo from '../../assets/logo.png';
+import NavBar from './NavBar';
 
 function SearchContainer() {
-    const [bookName, setBookName] = useState('');
-    const [author, setAuthor] = useState('');
+  const [bookName, setBookName] = useState('');
+  const [author, setAuthor] = useState('');
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleBookName = e => {
-        setBookName(e.target.value);
-    };
-    const handleAuthor = e => {
-        setAuthor(e.target.value);
-    };
+  const handleBookName = (e) => {
+    setBookName(e.target.value);
+  };
+  const handleAuthor = (e) => {
+    setAuthor(e.target.value);
+  };
 
-    const handleSubmit = () => {
-        if (!bookName || !author) {
-            alert("Please enter both fields.");
-            return;
-        }
-        navigate("/loading", {state: { book: bookName, author: author}});
+  const handleSubmit = () => {
+    if (!bookName || !author) {
+      alert('Please enter both fields.');
+      return;
     }
+    navigate('/loading', { state: { book: bookName, author: author } });
+  };
 
-    return (
-        <div>
-            <div className="form">
-                <div className="header">
-                    <img src={logo} width={'50%'} />
-                </div>
-                <b><label className="label">Book Name</label></b>
-                <input type='text' value={bookName} onChange={handleBookName} className="userInput" />
-                <br />
-                <b><label className="label"> Author </label></b>
-                <input type='text' value={author} onChange={handleAuthor} className="userInput" />
-                <br />
-                <button onClick={handleSubmit} className="submitButton">Submit</button>
-            </div >
-        </div >
-    )
+  useEffect(() => {
+    if (!sessionStorage.getItem('loggedIn')) {
+      navigate('/');
+    }
+  }, []);
+
+  return (
+    <div>
+      <NavBar />
+      <div className='form'>
+        <div className='header'>
+          <img src={logo} width={'50%'} />
+        </div>
+        <b>
+          <label className='label'>Book Name</label>
+        </b>
+        <input
+          type='text'
+          value={bookName}
+          onChange={handleBookName}
+          className='userInput'
+        />
+        <br />
+        <b>
+          <label className='label'> Author </label>
+        </b>
+        <input
+          type='text'
+          value={author}
+          onChange={handleAuthor}
+          className='userInput'
+        />
+        <br />
+        <button onClick={handleSubmit} className='submitButton'>
+          Submit
+        </button>
+      </div>
+    </div>
+  );
 }
-
-
 
 export default SearchContainer;

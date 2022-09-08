@@ -19,6 +19,7 @@ function LandingPage() {
       .then((res) => {
         if (res.status === 200) {
           sessionStorage.setItem('loggedIn', true);
+          navigate('/search');
         } else {
           throw new Error('Unable to log in.');
         }
