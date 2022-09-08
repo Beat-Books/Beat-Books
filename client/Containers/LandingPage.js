@@ -13,7 +13,7 @@ function LandingPage() {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                usermail: document.getElementById('username').value,
+                username: document.getElementById('username').value,
                 password: document.getElementById('password').value})
     }  
     )
@@ -33,7 +33,7 @@ function LandingPage() {
         <div className="landingPage">
             <input type="text" placeholder="username" id="username"/>
             <br></br>
-            <input type="text" placeholder="passsword" id="password"/>
+            <input type="password" placeholder="passsword" id="password"/>
             <br></br>
             <button onClick={sendLoginPost}>Login</button>
             <p>Don't have an account?</p>
