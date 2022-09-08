@@ -10,12 +10,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
+  const [username, setUsername] = useState('')
 
     return (
       <React.Fragment>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<LandingPage />} />
+            <Route path='/' element={<LandingPage username={username} setUsername={setUsername}/>} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/profile' element={<ProfileComponent />} />
             <Route path='/search' element={<SearchContainer />} />
