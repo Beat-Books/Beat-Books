@@ -15,31 +15,31 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      // const response = await fetch(`/api/user/profile`);
-      // const profileData = await response.json();
-
+      const response = await fetch(`/api/user/profile`);
+      const profileData = await response.json();
+      console.log(profileData);
       // FOR TESTING
-      const profileData = {
-        username: 'Username',
-        favoriteBooks: [
-          { bookTitle: 'Moby Dick', bookAuthor: 'Herman Melville' },
-          { bookTitle: 'The Giver', bookAuthor: 'Lois Lowry' },
-        ],
-        favoriteSongs: [
-          {
-            songName: 'Song Name 1',
-            songArtist: 'Song Artist 1',
-          },
-          {
-            songName: 'Song Name 2',
-            songArtist: 'Song Artist 2',
-          },
-        ],
-      };
+      // const profileData = {
+      //   username: 'Username',
+      //   favoriteBooks: [
+      //     { bookTitle: 'Moby Dick', bookAuthor: 'Herman Melville' },
+      //     { bookTitle: 'The Giver', bookAuthor: 'Lois Lowry' },
+      //   ],
+      //   favoriteSongs: [
+      //     {
+      //       songName: 'Song Name 1',
+      //       songArtist: 'Song Artist 1',
+      //     },
+      //     {
+      //       songName: 'Song Name 2',
+      //       songArtist: 'Song Artist 2',
+      //     },
+      //   ],
+      // };
       // END FOR TESTING
 
-      const { username, favoriteBooks, favoriteSongs } = profileData;
-      setUserProfile({ username, favoriteBooks, favoriteSongs });
+      // const { username, favoriteBooks, favoriteSongs } = profileData;
+      // setUserProfile({ username, favoriteBooks, favoriteSongs });
     };
 
     try {
