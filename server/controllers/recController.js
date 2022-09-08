@@ -2,8 +2,7 @@ const fetch = require('node-fetch');
 
 const recController = {};
 // source: https://developer.spotify.com/console/get-available-genre-seeds/
-const tempToken = 'BQCQ4s1dd2DBBTzhaNAIgkYw913FULz2h_uT5F1qST39eFeS1vFTB_Saz80bXyixus4ondtSJ_739xHdxc7wbDIPf1JD00unxNLwaS_p7Qn-zgzq3Yev_F1kbQYBmdYQadRt82VJMZ9ncClY-u8NjnmSe3HZmFrRDWEF9Z7c5DL7oHTdUBTtSB6jVUCvTSc2_As'
-
+const tempToken = 'BQDie5H8cvWAgzypX2op_iMk-D9f8r80Se0hbIgRje8yr7TaXP-Vpqa6LrgZvWubGYDD0jmmRSMautH6PKQvKPToV5sI_utYlaJ3sitn3zF9mJJrD7GwYpVKJefJ44qZw7ZOGVPJXHaLIxt02pNAV-c6LJbVfkVKFwQ4ZwMvBwy-iCUgofsrMqHQaS1cEY6MR3s'
 /* MUSIC REC LOGIC */
 /**
  * function parseQuery with:
@@ -74,7 +73,6 @@ recController.getSearchArray = (req, res, next) => {
  */
 recController.getMusic = async (req, res, next) => {
   try {
-    //res.locals.searchArray
     const searchArray = res.locals.searchArray;
     const userToken = tempToken; // NOTE: replace with token from UserModel
     res.locals.spotifyMatches = [];
