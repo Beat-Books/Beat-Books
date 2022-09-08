@@ -38,10 +38,8 @@ userController.verifyUser = (req, res, next) => {
 
 // get user profile
 userController.getUserProfile = (req, res, next) => {
-  console.log('user id', res.locals.id);
-    User.findOne({id: res.locals.id})
+    User.findOne({id: req.cookies.ssid})
     .then( (foundUser) => {
-      console.log(foundUser)
       res.locals.userProfile = foundUser;
       return next();
     })

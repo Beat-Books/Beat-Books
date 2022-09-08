@@ -15,7 +15,7 @@ authController.startSession = (req, res, next) => {
             message: { err: err },
           });
         } else {
-          console.log('start session: ', createdSession);
+          // console.log('start session: ', createdSession);
           res.locals.session = createdSession;
           return next();
         }
@@ -52,7 +52,7 @@ authController.endSession = (req, res, next) => {
 // authController.isLoggedIn
 // see if an existing session exists in DB for cookieId : req.cookies.ssid
 authController.isLoggedIn = (req, res, next) => {
-  console.log('checking is loggedin');
+  // console.log('checking is loggedin');
   Session.findOne({ cookieId: req.cookies.ssid }, (err) => {
     if (err) {
       return next({
@@ -60,7 +60,7 @@ authController.isLoggedIn = (req, res, next) => {
         message: { err: err },
       });
     } else {
-      console.log('user session exists');
+      // console.log('user session exists');
       res.locals.id = req.cookies.ssid;
       return next();
     }
