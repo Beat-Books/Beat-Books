@@ -77,10 +77,21 @@ recController.getMusic = async (req, res, next) => {
     //res.locals.searchArray
     const searchArray = res.locals.searchArray;
     const userToken = tempToken; // NOTE: replace with token from UserModel
+    res.locals.spotifyMatches = [];
 
     // default playlist if no results are found
-    res.locals.spotifyUrl = 'https://open.spotify.com/playlist/37i9dQZF1DWZwtERXCS82H?si=f78f10d73894477c'
-    
+    let defaultAlbum = {
+      name: 'Reading Playlist',
+      artist: 'Spotify',
+      image: 'https://i.pinimg.com/736x/69/b2/5e/69b25e2c2d0b29cdec93da2fd28ee2ec--old-books-vintage-books.jpg',
+      url: 'https://open.spotify.com/playlist/37i9dQZF1DWZwtERXCS82H?si=f78f10d73894477c',
+      type: 'playlist'
+    };
+      
+    if (searchArray.length == 0) {
+      res.locals.spotifyMatches.push(defaultAlbum);
+      return next();
+    }
     // iterate through searchArray until a playlist is returned;
     for (const el of searchArray) {
       let queryUrl = `https://api.spotify.com/v1/search?type=album&q=${el}`
@@ -91,14 +102,24 @@ recController.getMusic = async (req, res, next) => {
         }
       });
       let data = await query.json();
-      let playlistUrl = data.albums.items[0].external_urls.spotify;
-      // exit loop and return as soon as a match is found
-      if (playlistUrl) {
-        res.locals.spotifyUrl = playlistUrl;
-        return next();
-      }
+      let match = data.albums.items;
+      // exit loop after 3 matches
+      for (let i = 0; i < 3; i++) {
+        let newMatch = {
+          name: match[i].name,
+          artist: match[i].artists[0].name,
+          url: match[i].external_urls.spotify,
+          image: match[i].images[0].url,
+          type: match[i].type
+        };
+        res.locals.spotifyMatches.push(newMatch);
+      };
+    }
+    if (res.locals.spotifyMatches.length == 0) {
+      res.locals.spotifyMatches.push(defaultAlbum);
     }
     return next();
+    
   } catch (err) {
     return next({
       log: 'error in recController.getMusic',

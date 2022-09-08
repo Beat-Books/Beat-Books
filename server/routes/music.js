@@ -10,7 +10,7 @@ router.post('/rec', // NOTE: Change to POST in production
   recController.getSearchArray,
   recController.getMusic, 
   (req, res) => {
-    res.status(200).json(res.locals.spotifyUrl);
+    res.status(200).json(res.locals.spotifyMatches);
   }
 )
 
