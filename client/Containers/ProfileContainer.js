@@ -15,27 +15,22 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      // const response = await fetch(`/api/user/profile`);
-      // const profileData = await response.json();
+      const response = await fetch(`/api/user/profile`);
+      const profileData = await response.json();
+      console.log(profileData);
 
-      // FOR TESTING
-      const profileData = {
-        username: 'Username',
-        favoriteBooks: [
-          { bookTitle: 'Moby Dick', bookAuthor: 'Herman Melville' },
-          { bookTitle: 'The Giver', bookAuthor: 'Lois Lowry' },
-        ],
-        favoriteSongs: [
-          {
-            songName: 'Song Name 1',
-            songArtist: 'Song Artist 1',
-          },
-          {
-            songName: 'Song Name 2',
-            songArtist: 'Song Artist 2',
-          },
-        ],
-      };
+      // // FOR TESTING
+      // profileData.favoriteSongs.push(
+      //   {
+      //     songName: 'Song Name 1',
+      //     songArtist: 'Song Artist 1',
+      //   },
+      //   {
+      //     songName: 'Song Name 2',
+      //     songArtist: 'Song Artist 2',
+      //   }
+      // );
+
       // END FOR TESTING
 
       const { username, favoriteBooks, favoriteSongs } = profileData;
@@ -52,17 +47,17 @@ const ProfileContainer = (props) => {
   useEffect(() => {
     const { favoriteBooks, favoriteSongs } = userProfile;
 
-    const booksList = [];
-    favoriteBooks.forEach((book, i) => {
-      booksList.push(
-        <Book
-          key={i + book.bookTitle}
-          bookTitle={book.bookTitle}
-          bookAuthor={book.bookAuthor}
-        />
-      );
-    });
-    setBooksList(booksList);
+    // const booksList = [];
+    // favoriteBooks.forEach((book, i) => {
+    //   booksList.push(
+    //     <Book
+    //       key={i + book.bookTitle}
+    //       bookTitle={book.bookTitle}
+    //       bookAuthor={book.bookAuthor}
+    //     />
+    //   );
+    // });
+    // setBooksList(booksList);
 
     const songsList = [];
     favoriteSongs.forEach((song, i) => {
@@ -93,13 +88,15 @@ const ProfileContainer = (props) => {
       <div className='form'>
         <div className='heading'>Welcome, {userProfile.username}!</div>
         <div className='favorites-container'>
-          <div className='favBooks'>
+          {/* <div className='favBooks'>
             <div className='subheading'>Your Favorited Books</div>
             {booksList}
-          </div>
+          </div> */}
           <div className='favSongs'>
-            <div className='subheading'>Your Favorited Books</div>
-            {songsList}
+            <div className='subheading'>Your Favorited Albums</div>
+            <div className='album-text'>
+              {songsList.length ? songsList : 'You have no favorited albums.'}
+            </div>
           </div>
         </div>
       </div>

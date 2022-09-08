@@ -81,7 +81,7 @@ body {
 
 .favorites-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .backToSearch {
@@ -95,8 +95,8 @@ body {
   font-size: 20px;
 }
 
-.song-container {
-  font-size: 20px;
+.album-text {
+  font-size: 25px;
 }
 
 input:focus {
