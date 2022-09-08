@@ -33,8 +33,8 @@ const ProfileContainer = (props) => {
 
       // END FOR TESTING
 
-      // const { username, favoriteBooks, favoriteSongs } = profileData;
-      // setUserProfile({ username, favoriteBooks, favoriteSongs });
+      const { username, favoriteBooks, favoriteSongs } = profileData;
+      setUserProfile({ username, favoriteBooks, favoriteSongs });
     };
 
     try {
@@ -86,7 +86,10 @@ const ProfileContainer = (props) => {
     <div>
       <NavBar />
       <div className='form'>
-        <div className='heading'>Welcome, {userProfile.username}!</div>
+        {/* <div className='heading'>Welcome, {userProfile.username}!</div> */}
+        <div className='heading'>
+          Welcome, {sessionStorage.getItem('username')}!
+        </div>
         <div className='favorites-container'>
           {/* <div className='favBooks'>
             <div className='subheading'>Your Favorited Books</div>
