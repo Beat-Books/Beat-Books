@@ -2,9 +2,6 @@
 const mongoose = require('mongoose');
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
-const pw = process.env.MONGODB_PW;
-const url = `mongodb+srv://bookbeats_dev:${pw}@bookbeats.0wiktwi.mongodb.net/?retryWrites=true&w=majority)`;
-mongoose.connect(url, () => console.log('mongoDB connected'));
 
 // SCHEMA SETUP
 const UserSchema = new mongoose.Schema({
@@ -23,6 +20,12 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  spotify_access_token: String,
+  spotify_refresh_token: String,
+  spotify_token_type: String,
+  spotify_scope: String,
+  spotify_token_expires_in_sec: Number,
+  spotify_token_created_at: Date,
   favoriteBooks: [
     {
       bookTitle: String,
