@@ -15,6 +15,10 @@ import NavBar from './NavBar';
 //     )
 // }
 
+const string = 'spotify:artist:4sQpFoM4UXAXcniRKQyKWn';
+console.log(string.slice(':'))
+
+
 const MusicContainer = (props) => {
 
     const [favsMessage, setFavsMessage] = useState("");
@@ -65,7 +69,7 @@ const MusicContainer = (props) => {
                         </div>
                      </div>
                      <div className="web-player">
-                        <iframe  src={`https://open.spotify.com/embed-legacy/album/${currentAlbumObj.url}?utm_source=generator `}width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" id="web-player"></iframe>
+                        <iframe  src={`https://open.spotify.com/embed-legacy/album/${currentAlbumObj.id}?utm_source=generator `}width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" id="web-player"></iframe>
                     </div>
                      
                 </div>
